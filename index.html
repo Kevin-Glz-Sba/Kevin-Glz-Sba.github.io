@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Invitación al Bautizo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to top, #dff3ff, #ffffff);
+      overflow-x: hidden;
+      position: relative;
+    }
+    h1, h3 { color: #007bff; }
+    .container { position: relative; z-index: 10; }
+
+    /* Globos */
+  .balloon {
+  position: absolute;
+  bottom: -50px;       /* empieza justo debajo de la pantalla */
+  width: 60px;
+  animation: floatUp 10s infinite linear;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  0% {
+    bottom: -50px;      /* inicio justo debajo */
+    opacity: 1;
+  }
+  100% {
+    bottom: 100%;       /* sube hasta arriba de la ventana */
+    opacity: 0;         /* se desvanece al llegar arriba */
+  }
+}
+
+
+
+
+    /* Nubes */
+    .cloud {
+      position: absolute;
+      width: 150px;
+      opacity: 0.8;
+      animation: moveClouds 70s linear infinite;
+      z-index: 0;
+    }
+    @keyframes moveClouds {
+      0% { left: -250px; }
+      100% { left: 110%; }
+    }
+
+    /* Frase */
+    .frase {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #333;
+      background: #e6f3ff;
+      border-left: 6px solid #007bff;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      margin: 2rem auto;
+      max-width: 700px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    /* Mapas y formularios */
+    .map-container, .form-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      background: #fff;
+    }
+    .form-card {
+      padding: 2rem;
+    }
+
+    /* Bordes laterales */
+    .side-border {
+      position: fixed;
+      top: 0;
+      width: 120px;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .left-border { left: 0; }
+    .right-border { right: 0; }
+    .side-border img {
+      width: 100%;
+      object-fit: contain;
+      display: block;
+      padding: 2px;
+    }
+    @media(max-width: 992px){
+      .side-border { display:none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Música -->
+  <audio id="bg-music" src="assets/musca.mp3" autoplay muted loop></audio>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const music = document.getElementById('bg-music');
+      setTimeout(()=>{ music.muted=false; music.play().catch(()=>{}); },1000);
+      document.body.addEventListener('click',()=>{ music.muted=false; music.play(); },{once:true});
+    });
+  </script>
+
+  <!-- Nubes -->
+  <img src="assets/paloma3.gif" class="cloud" style="top:8%; left:0%;">
+  <img src="assets/paloma3.gif" class="cloud" style="top:18%; left:-200px;">
+  <img src="assets/paloma3.gif" class="cloud" style="top:28%; left:-400px;">
+
+  <!-- Globos dinámicos -->
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const body=document.body;
+      for(let i=0;i<20;i++){
+        const balloon=document.createElement("img");
+        balloon.src=`assets/globo${(i%6)+1}.png`;
+        balloon.classList.add("balloon");
+        balloon.style.left=Math.random()*100+"vw";
+        balloon.style.animationDelay=Math.random()*8+"s";
+        balloon.style.width=(40+Math.random()*40)+"px";
+        body.appendChild(balloon);
+      }
+    });
+  </script>
+
+  <!-- Contenido principal -->
+  <div class="container text-center py-5">
+    <h1 class="display-5 fw-bold mb-4">¡Estás Invitado al Bautizo de<br>Enzo Leonardo Zanabria Hernández!</h1>
+    <p class="lead">✨ Nos encantaría compartir este momento tan especial contigo ✨</p>
+    <p class="lead fw-semibold">📅 18 de octubre de 2025</p>
+
+    <div class="frase">
+      Estamos orgullosos de esta fecha sagrada que marca el nacimiento de tu nueva vida en el amor de nuestro Señor Jesucristo.
+    </div>
+
+    <!-- Formulario -->
+    <div class="form-card mt-5 mx-auto" style="max-width:600px;">
+      <h3 class="fw-bold mb-3">Confirma tu asistencia</h3>
+      <p class="lead">Por favor confirma si podrás acompañarnos en este día especial 💙</p>
+      <form id="miFormulario" method="POST"
+            action="https://docs.google.com/forms/d/e/1FAIpQLSdXNepuHXE1BL8w1-QRASghag7WfZlF65YCVU20GLxMlFI6Wg/formResponse"
+            target="hidden_iframe" onsubmit="return enviarGoogleForm(event);">
+        
+        <div class="mb-3 text-start">
+          <label for="nombreInput" class="form-label fw-bold">Nombre Completo</label>
+          <input type="text" class="form-control" id="nombreInput" name="entry.1506892174" placeholder="Ingresa tu nombre completo" required>
+        </div>
+
+        <div class="mb-3 text-start">
+          <label for="asistencia" class="form-label fw-bold">Confirmación de Asistencia</label>
+          <select class="form-select" id="asistencia" name="entry.505008118" required>
+            <option value="" selected disabled>Selecciona una opción</option>
+            <option value="✅Si asistiré">✅ Sí asistiré</option>
+            <option value="❌ No podré asistir">❌ No podré asistir</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 fw-bold">Enviar</button>
+      </form>
+      <iframe name="hidden_iframe" style="display:none;"></iframe>
+    </div>
+
+    <!-- Mapas -->
+    <div class="row mt-5"> 
+      <div class="col-md-6"> 
+        <a href="https://maps.app.goo.gl/iZgUnpsCKrA9xGHZ7">
+          <h5>Ubicación de la Misa</h5>
+        </a> <div class="map-container"> 
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d856.9909367821843!2d-99.87311763472272!3d19.79956884782844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d258e95af968a7%3A0x42e4773ff84f2e92!2sCatedral%20de%20Atlacomulco%20(La%20Divina%20Providencia)!5e1!3m2!1ses-419!2smx!4v1753146685485!5m2!1ses-419!2smx" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> 
+        </div> 
+      </div> 
+      <div class="col-md-6"> 
+        <a href="https://maps.app.goo.gl/ZC29vyFcnke4iWWH7">
+          <h5>Ubicación del Evento</h5></a> <div class="map-container"> 
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d254.6915593367429!2d-99.86489233082293!3d19.85780963001075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses-419!2smx!4v1753146742676!5m2!1ses-419!2smx" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> 
+          </div> 
+        </div> 
+      </div> 
+    </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="mensajeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">💌 Mensaje</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center" style="font-size:1.2rem;">
+          <div id="emojiModal" style="font-size:3rem; margin-bottom:10px;"></div>
+          <div id="mensajeContenido"></div>
+          <div id="extraBoton" class="mt-3 d-flex flex-column gap-2"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function enviarGoogleForm(event) {
+      event.preventDefault(); // prevenir envío inmediato
+
+      const nombre = document.getElementById("nombreInput").value.trim().toLowerCase();
+      const asistencia = document.getElementById("asistencia").value;
+      const mesas = {"kevin gonzalez":5,"luz elena":3,"pedro reyes":1}; // lista de invitados
+
+      // Verificar si el nombre está en la lista
+      if(!mesas[nombre]){
+        alert("Lo sentimos, tu nombre no está en la lista de invitados. No puedes enviar la confirmación.");
+        return false; // bloquea envío
+      }
+
+      // Preparar mensaje en modal
+      let mensaje = "";
+      let emoji = "";
+      let botones = "";
+
+      if(asistencia === "✅Si asistiré"){
+        emoji = "🎉";
+        mensaje = `¡Hola <b>${nombre}</b>!<br>Estás en la <b>mesa ${mesas[nombre]}</b>.`;
+        botones = `
+          <a href="https://maps.app.goo.gl/ZC29vyFcnke4iWWH7" target="_blank" class="btn btn-outline-primary">📍 Ver ubicación del evento</a>
+          <a href="https://maps.app.goo.gl/iZgUnpsCKrA9xGHZ7" target="_blank" class="btn btn-outline-secondary">🛕 Ver ubicación de la misa</a>
+        `;
+      } else {
+        emoji = "😥";
+        mensaje = `Lamentamos que no puedas asistir, <b>${nombre}</b>.<br>¡Te mandamos un fuerte abrazo!`;
+      }
+
+      // Inyectar contenido en el modal
+      document.getElementById("emojiModal").innerHTML = emoji;
+      document.getElementById("mensajeContenido").innerHTML = mensaje;
+      document.getElementById("extraBoton").innerHTML = botones;
+
+      // Mostrar modal
+      const modal = new bootstrap.Modal(document.getElementById('mensajeModal'));
+      modal.show();
+
+      // Enviar a Google Forms en segundo plano
+      event.target.submit();
+
+      // Resetear formulario tras mostrar modal
+      setTimeout(()=>{
+        document.getElementById("miFormulario").reset();
+      }, 800);
+    }
+
+    // Bordes decorativos
+    const imagenesBebe = ["assets/bebe1.png","assets/bebe2.png","assets/bebe3.png","assets/bebe4.png"];
+    const cantidadPorLado = 6;
+    function crearBordesLaterales() {
+      const left=document.getElementById("leftBorder"), right=document.getElementById("rightBorder");
+      for(let i=0;i<cantidadPorLado;i++){
+        const imgSrc=imagenesBebe[i%imagenesBebe.length];
+        const imgL=document.createElement("img"); imgL.src=imgSrc; imgL.alt="Bebé";
+        const imgR=document.createElement("img"); imgR.src=imgSrc; imgR.alt="Bebé";
+        left.appendChild(imgL); right.appendChild(imgR);
+      }
+    }
+    window.addEventListener("DOMContentLoaded", crearBordesLaterales);
+  </script>
+
+  <!-- Bordes laterales -->
+  <div class="side-border left-border" id="leftBorder"></div>
+  <div class="side-border right-border" id="rightBorder"></div>
+</body>
+</html>
