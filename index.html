@@ -6,7 +6,6 @@
   <title>Invitación al Bautizo</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-  
   <style>
     body {
       font-family: 'Quicksand', sans-serif;
@@ -36,6 +35,7 @@
     opacity: 0;         /* se desvanece al llegar arriba */
   }
 }
+
     /* Frase */
     .frase {
       font-size: 1.3rem;
@@ -86,29 +86,28 @@
     }
   </style>
 </head>
-
 <body>
   <!-- Música -->
   <audio id="bg-music" src="/assets/musica.mp3" autoplay muted loop></audio>
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const music = document.getElementById('bg-music');
-      setTimeout(() => { music.muted = false; music.play().catch(() => {}); }, 1000);
-      document.body.addEventListener('click', () => { music.muted = false; music.play(); }, { once: true });
+      setTimeout(()=>{ music.muted=false; music.play().catch(()=>{}); },1000);
+      document.body.addEventListener('click',()=>{ music.muted=false; music.play(); },{once:true});
     });
   </script>
 
   <!-- Globos dinámicos -->
   <script>
     window.addEventListener("DOMContentLoaded", () => {
-      const body = document.body;
-      for (let i = 0; i < 20; i++) {
-        const balloon = document.createElement("img");
-        balloon.src = `/assets/globo${(i % 6) + 1}.png`;
+      const body=document.body;
+      for(let i=0;i<20;i++){
+        const balloon=document.createElement("img");
+        balloon.src=`/assets/globo${(i%6)+1}.png`;
         balloon.classList.add("balloon");
-        balloon.style.left = Math.random() * 100 + "vw";
-        balloon.style.animationDelay = Math.random() * 8 + "s";
-        balloon.style.width = (40 + Math.random() * 40) + "px";
+        balloon.style.left=Math.random()*100+"vw";
+        balloon.style.animationDelay=Math.random()*8+"s";
+        balloon.style.width=(40+Math.random()*40)+"px";
         body.appendChild(balloon);
       }
     });
@@ -116,9 +115,7 @@
 
   <!-- Contenido principal -->
   <div class="container text-center py-5">
-    <h1 class="display-5 fw-bold mb-4">
-      ¡Estás Invitado al Bautizo de<br>Enzo Leonardo Zanabria Hernández!
-    </h1>
+    <h1 class="display-5 fw-bold mb-4">¡Estás Invitado al Bautizo de<br>Enzo Leonardo Zanabria Hernández!</h1>
     <p class="lead">✨ Nos encantaría compartir este momento tan especial contigo ✨</p>
     <p class="lead fw-semibold">📅 18 de octubre de 2025</p>
 
@@ -154,58 +151,50 @@
     </div>
 
     <!-- Mapas -->
-    <div class="row mt-5 g-4">
-      <!-- Misa -->
+    <div class="row mt-5"> 
       <div class="col-md-6">
-        <a href="https://maps.app.goo.gl/mDzoizMcxHnRXqka9" target="_blank">
-          <h5 class="fw-bold">Ubicación de la Misa</h5>
-        </a>
-        <p>La misa será a la <b>1:30 de la tarde</b>... <br>¡Te esperamos 🤩!</p>
+  <a href="https://maps.app.goo.gl/mDzoizMcxHnRXqka9">
+    <h5>Ubicación de la Misa</h5>
+  </a>
         <div class="map-container">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7507.768299968198!2d-99.8715829!3d19.8025087!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d258e95e6860bf%3A0xf9f42dc484ce6c4!2sParroquia%20de%20Santa%20Mar%C3%ADa%20de%20Guadalupe!5e0!3m2!1ses!2smx!4v1757377127783!5m2!1ses!2smx"
-            width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            width="100%"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+            referrerpolicy="no-referrer-when-downgrade">
           </iframe>
         </div>
       </div>
 
-      <!-- Evento -->
-      <div class="col-md-6">
-        <a href="https://maps.app.goo.gl/ZC29vyFcnke4iWWH7" target="_blank">
-          <h5 class="fw-bold">Ubicación del Evento</h5>
-        </a>
-        <p>Será un honor compartir contigo esta celebración a las <b>4:00 de la tarde</b>... ¡No faltes 😉!</p>
-        <div class="map-container">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d234.53612375214058!2d-99.86503872954924!3d19.85780181262618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2smx!4v1757379121543!5m2!1ses!2smx" 
-            width="100%" 
-            height="350" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-
-        </div>
-      </div>
+      <div class="col-md-6"> 
+        <a href="https://maps.app.goo.gl/ZC29vyFcnke4iWWH7">
+          <h5>Ubicación del Evento</h5></a> <div class="map-container"> 
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d254.6915593367429!2d-99.86489233082293!3d19.85780963001075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses-419!2smx!4v1753146742676!5m2!1ses-419!2smx" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> 
+          </div> 
+        </div> 
+      </div> 
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="mensajeModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded-4 shadow">
-          <div class="modal-header bg-primary text-white">
-            <h5 class="modal-title">💌 Mensaje</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body text-center" style="font-size:1.2rem;">
-            <div id="emojiModal" style="font-size:3rem; margin-bottom:10px;"></div>
-            <div id="mensajeContenido"></div>
-            <div id="extraBoton" class="mt-3 d-flex flex-column gap-2"></div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
-          </div>
+  <!-- Modal -->
+  <div class="modal fade" id="mensajeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">💌 Mensaje</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center" style="font-size:1.2rem;">
+          <div id="emojiModal" style="font-size:3rem; margin-bottom:10px;"></div>
+          <div id="mensajeContenido"></div>
+          <div id="extraBoton" class="mt-3 d-flex flex-column gap-2"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
         </div>
       </div>
     </div>
@@ -237,7 +226,7 @@
         mensaje = `¡Hola <b>${nombre}</b>!<br>Estás en la <b>mesa ${mesas[nombre]}</b>.`;
         botones = `
           <a href="https://maps.app.goo.gl/ZC29vyFcnke4iWWH7" target="_blank" class="btn btn-outline-primary">📍 Ver ubicación del evento</a>
-          <a href="https://maps.app.goo.gl/iZgUnpsCKrA9xGHZ7" target="_blank" class="btn btn-outline-secondary">🛕 Ver ubicación de la misa</a>
+          <a href="https://maps.app.goo.gl/mDzoizMcxHnRXqka9" target="_blank" class="btn btn-outline-secondary">🛕 Ver ubicación de la misa</a>
         `;
       } else {
         emoji = "😥";
@@ -263,7 +252,7 @@
     }
 
     // Bordes decorativos
-    const imagenesBebe = ["assets/bebe1.png","assets/bebe2.png","assets/bebe3.png","assets/bebe4.png"];
+    const imagenesBebe = ["/assets/bebe1.png","/assets/bebe2.png","/assets/bebe3.png","/assets/bebe4.png"];
     const cantidadPorLado = 6;
     function crearBordesLaterales() {
       const left=document.getElementById("leftBorder"), right=document.getElementById("rightBorder");
@@ -276,11 +265,9 @@
     }
     window.addEventListener("DOMContentLoaded", crearBordesLaterales);
   </script>
+
   <!-- Bordes laterales -->
   <div class="side-border left-border" id="leftBorder"></div>
   <div class="side-border right-border" id="rightBorder"></div>
 </body>
 </html>
-
-
-
