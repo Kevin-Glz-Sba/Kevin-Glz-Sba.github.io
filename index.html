@@ -16,51 +16,24 @@
     h1, h3 { color: #007bff; }
     .container { position: relative; z-index: 10; }
 
-/* Globos */
-.balloon {
-  position: absolute;
-  bottom: -50px;       /* empieza justo debajo de la pantalla */
-  width: 60px;
-  animation: floatUp 10s infinite linear;
-  z-index: 0;          /* más bajo que cualquier overlay */
-  pointer-events: none; /* no bloquea clics */
-}
-
-@keyframes floatUp {
-  0% {
-    bottom: -50px;
-    opacity: 1;
-  }
-  100% {
-    bottom: 100%;
-    opacity: 0;
-  }
-}
-
-/* Bordes laterales */
-.side-border {
-  position: fixed;
-  top: 0;
-  width: 120px;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 0;            /* debajo del modal */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  pointer-events: none;  /* no bloquea clics */
-}
-.left-border { left: 0; }
-.right-border { right: 0; }
-.side-border img {
-  width: 100%;
-  object-fit: contain;
-  display: block;
-  padding: 2px;
-}
-@media(max-width: 992px){
-  .side-border { display:none; }
-}
+/* Globos */ 
+    .balloon { 
+      position: absolute; 
+      bottom: -50px; /* empieza justo debajo de la pantalla */ 
+      width: 60px; 
+      animation: floatUp 10s infinite linear; 
+      z-index: 1; 
+    } 
+    @keyframes floatUp {
+      0% { 
+        bottom: -50px; /* inicio justo debajo */ 
+        opacity: 1; 
+      } 
+      100% { 
+        bottom: 100%; /* sube hasta arriba de la ventana */ 
+        opacity: 0; /* se desvanece al llegar arriba */ 
+      } 
+    }
 
     /* Frase */
     .frase {
@@ -328,6 +301,7 @@
   <div class="side-border right-border" id="rightBorder"></div>
 </body>
 </html>
+
 
 
 
