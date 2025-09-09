@@ -240,76 +240,95 @@
   </div>
 
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    function enviarGoogleForm(event) {
-      event.preventDefault(); // prevenir envío inmediato
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // 🔹 Función para normalizar nombres (acentos, espacios, minúsculas)
+  function normalizarTexto(texto) {
+    return texto
+      .normalize("NFD")                // separa letras y tildes
+      .replace(/[\u0300-\u036f]/g, "") // elimina tildes
+      .toLowerCase()                   // convierte a minúsculas
+      .replace(/\s+/g, " ")            // reemplaza múltiples espacios por uno
+      .trim();                         // elimina espacios al inicio y fin
+  }
 
-      const nombre = document.getElementById("nombreInput").value.trim().toLowerCase();
-      const asistencia = document.getElementById("asistencia").value;
-      const mesas = {"kevin gonzalez":5,"luz elena":3,"pedro reyes":1}; // lista de invitados
+  function enviarGoogleForm(event) {
+    event.preventDefault(); // prevenir envío inmediato
 
-      // Verificar si el nombre está en la lista
-      if(!mesas[nombre]){
-        alert("Lo sentimos, tu nombre no está en la lista de invitados. No puedes enviar la confirmación.");
-        return false; // bloquea envío
-      }
+    const nombreInput = document.getElementById("nombreInput").value;
+    const nombre = normalizarTexto(nombreInput); // 👉 usamos la función
+    const asistencia = document.getElementById("asistencia").value;
 
-      // Preparar mensaje en modal
-      let mensaje = "";
-      let emoji = "";
-      let botones = "";
+    // lista de invitados (también normalizados en minúsculas, sin tildes)
+    const mesas = {
+      "kevin gonzalez": 5,
+      "luz elena": 3,
+      "pedro reyes": 1
+    };
 
-      if(asistencia === "✅Si asistiré"){
-        emoji = "🎉";
-        mensaje = `¡Hola <b>${nombre}</b>!<br>Estás en la <b>mesa ${mesas[nombre]}</b>.`;
-        botones = `
-          <a href="https://maps.app.goo.gl/ZC29vyFcnke4iWWH7" target="_blank" class="btn btn-outline-primary">📍 Ver ubicación del evento</a>
-          <a href="https://maps.app.goo.gl/mDzoizMcxHnRXqka9" target="_blank" class="btn btn-outline-secondary">🛕 Ver ubicación de la misa</a>
-        `;
-      } else {
-        emoji = "😥";
-        mensaje = `Lamentamos que no puedas asistir, <b>${nombre}</b>.<br>¡Te mandamos un fuerte abrazo!`;
-      }
-
-      // Inyectar contenido en el modal
-      document.getElementById("emojiModal").innerHTML = emoji;
-      document.getElementById("mensajeContenido").innerHTML = mensaje;
-      document.getElementById("extraBoton").innerHTML = botones;
-
-      // Mostrar modal
-      const modal = new bootstrap.Modal(document.getElementById('mensajeModal'));
-      modal.show();
-
-      // Enviar a Google Forms en segundo plano
-      event.target.submit();
-
-      // Resetear formulario tras mostrar modal
-      setTimeout(()=>{
-        document.getElementById("miFormulario").reset();
-      }, 800);
+    // Verificar si el nombre está en la lista
+    if (!mesas[nombre]) {
+      alert("Lo sentimos, tu nombre no está en la lista de invitados. No puedes enviar la confirmación.");
+      return false; // bloquea envío
     }
 
-    // Bordes decorativos
-    const imagenesBebe = ["/assets/bebe1.png","/assets/bebe2.png","/assets/bebe3.png","/assets/bebe4.png"];
-    const cantidadPorLado = 6;
-    function crearBordesLaterales() {
-      const left=document.getElementById("leftBorder"), right=document.getElementById("rightBorder");
-      for(let i=0;i<cantidadPorLado;i++){
-        const imgSrc=imagenesBebe[i%imagenesBebe.length];
-        const imgL=document.createElement("img"); imgL.src=imgSrc; imgL.alt="Bebé";
-        const imgR=document.createElement("img"); imgR.src=imgSrc; imgR.alt="Bebé";
-        left.appendChild(imgL); right.appendChild(imgR);
-      }
+    // Preparar mensaje en modal
+    let mensaje = "";
+    let emoji = "";
+    let botones = "";
+
+    if (asistencia === "✅Si asistiré") {
+      emoji = "🎉";
+      mensaje = `¡Hola <b>${nombreInput}</b>!<br>Estás en la <b>mesa ${mesas[nombre]}</b>.`;
+      botones = `
+        <a href="https://maps.app.goo.gl/ZC29vyFcnke4iWWH7" target="_blank" class="btn btn-outline-primary">📍 Ver ubicación del evento</a>
+        <a href="https://maps.app.goo.gl/mDzoizMcxHnRXqka9" target="_blank" class="btn btn-outline-secondary">🛕 Ver ubicación de la misa</a>
+      `;
+    } else {
+      emoji = "😥";
+      mensaje = `Lamentamos que no puedas asistir, <b>${nombreInput}</b>.<br>¡Te mandamos un fuerte abrazo!`;
     }
-    window.addEventListener("DOMContentLoaded", crearBordesLaterales);
-  </script>
+
+    // Inyectar contenido en el modal
+    document.getElementById("emojiModal").innerHTML = emoji;
+    document.getElementById("mensajeContenido").innerHTML = mensaje;
+    document.getElementById("extraBoton").innerHTML = botones;
+
+    // Mostrar modal
+    const modal = new bootstrap.Modal(document.getElementById('mensajeModal'));
+    modal.show();
+
+    // Enviar a Google Forms en segundo plano
+    event.target.submit();
+
+    // Resetear formulario tras mostrar modal
+    setTimeout(()=>{
+      document.getElementById("miFormulario").reset();
+    }, 800);
+  }
+
+  // Bordes decorativos
+  const imagenesBebe = ["/assets/bebe1.png","/assets/bebe2.png","/assets/bebe3.png","/assets/bebe4.png"];
+  const cantidadPorLado = 6;
+  function crearBordesLaterales() {
+    const left=document.getElementById("leftBorder"), right=document.getElementById("rightBorder");
+    for(let i=0;i<cantidadPorLado;i++){
+      const imgSrc=imagenesBebe[i%imagenesBebe.length];
+      const imgL=document.createElement("img"); imgL.src=imgSrc; imgL.alt="Bebé";
+      const imgR=document.createElement("img"); imgR.src=imgSrc; imgR.alt="Bebé";
+      left.appendChild(imgL); right.appendChild(imgR);
+    }
+  }
+  window.addEventListener("DOMContentLoaded", crearBordesLaterales);
+</script>
+
 
   <!-- Bordes laterales -->
   <div class="side-border left-border" id="leftBorder"></div>
   <div class="side-border right-border" id="rightBorder"></div>
 </body>
 </html>
+
 
 
 
