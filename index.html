@@ -24,7 +24,6 @@
     h1, h3, h5 { color: #0056b3; }
     .container { position: relative; z-index: 10; }
 
-    /* Globos animados */
     .balloon {
       position: absolute;
       bottom: -60px;
@@ -36,7 +35,6 @@
       100% { bottom: 100%; opacity: 0; }
     }
 
-    /* Frase */
     .frase {
       font-size: 1.3rem;
       font-weight: 600;
@@ -50,7 +48,6 @@
       box-shadow: 0 4px 14px rgba(0,0,0,0.1);
     }
 
-    /* Mapas y formulario */
     .map-container, .form-card {
       border-radius: 12px;
       overflow: hidden;
@@ -59,7 +56,6 @@
     }
     .form-card { padding: 2rem; }
 
-    /* Carrusel de Enzo */
     .enzo-img {
       max-width: 280px;
       border-radius: 30px;
@@ -82,7 +78,7 @@
     });
   </script>
 
-  <!-- Globos dinámicos -->
+  <!-- Globos -->
   <script>
     window.addEventListener("DOMContentLoaded", () => {
       const body=document.body;
@@ -98,11 +94,9 @@
     });
   </script>
 
-  <!-- Contenido principal -->
   <div class="container text-center py-5">
     <h1 class="display-5 fw-bold mb-4">💧 ¡Estás Invitado al Bautizo de<br>Enzo Leonardo Zanabria Hernández! 💧</h1>
 
-    <!-- Imagen rotatoria de Enzo -->
     <img id="enzoFoto" src="/assets/enzo1.png" alt="Foto de Enzo" class="enzo-img img-fluid">
 
     <p class="lead">✨ Nos encantaría compartir este momento tan especial contigo ✨</p>
@@ -134,18 +128,25 @@
           </select>
         </div>
 
+        <!-- Numero de invitados (oculto inicialmente) -->
+        <div class="mb-3 text-start" id="numInvitadosDiv" style="display:none;">
+          <label for="numInvitados" class="form-label fw-bold">Número de Invitados</label>
+          <input type="number" class="form-control" id="numInvitados" name="entry.1972390165" 
+                 placeholder="¿Cuántas personas invitarás?" min="1" max="9">
+        </div>
+
         <button type="submit" class="btn btn-primary w-100 fw-bold">Enviar</button>
       </form>
       <iframe name="hidden_iframe" style="display:none;"></iframe>
     </div>
-
+  </div>
     <!-- Mapas -->
     <div class="row mt-5"> 
       <div class="col-md-6 mb-4">
         <a href="https://maps.app.goo.gl/mDzoizMcxHnRXqka9" target="_blank">
           <h5>📍 Ubicación de la Misa</h5>
         </a>
-        <p class="mb-2">⏰ La misa comenzará a la <strong>1:00 pm</strong>, ¡prepárate para un momento sagrado y lleno de bendiciones que recordaremos siempre! 🙏💖</p>
+        <p class="mb-2">⏰ La misa comenzará a la <strong>1:30 pm</strong>, ¡prepárate para un momento sagrado y lleno de bendiciones que recordaremos siempre! 🙏💖</p>
         <div class="map-container">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7507.768299968198!2d-99.8715829!3d19.8025087!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d258e95e6860bf%3A0xf9f42dc484ce6c4!2sParroquia%20de%20Santa%20Mar%C3%ADa%20de%20Guadalupe!5e0!3m2!1ses!2smx!4v1757377127783!5m2!1ses!2smx"
@@ -174,7 +175,6 @@
       </div> 
     </div> 
   </div>
-
   <!-- Modal -->
   <div class="modal fade" id="mensajeModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -198,12 +198,68 @@
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+    // Mostrar/Ocultar invitados
+    document.getElementById("asistencia").addEventListener("change", function(){
+      const div = document.getElementById("numInvitadosDiv");
+      if(this.value === "✅Si asistiré"){
+        div.style.display = "block";
+        document.getElementById("numInvitados").setAttribute("required","true");
+      } else {
+        div.style.display = "none";
+        document.getElementById("numInvitados").removeAttribute("required");
+      }
+    });
+
     // Formulario
     function enviarGoogleForm(event) {
       event.preventDefault();
       const nombre = document.getElementById("nombreInput").value.trim().toLowerCase();
       const asistencia = document.getElementById("asistencia").value;
-      const mesas = { "kevin gonzalez":5, "luz elena":3, "pedro reyes":1 };
+
+      const mesas = { 
+        "familia zanabria gonzalez":"principal", 
+        "familia zanabria hernandez":"principal", 
+        "familia gonzalez sanabria":1,
+        "familia manuel":2, 
+        "familia sanabria estrada":4, 
+        "familia gonzalez ruiz":5,
+        "familia navarrete gonzalez":5, 
+        "familia gonzalez":5, 
+        "familia sanabria asencio":6,
+        "familia sanabria candilla":6, 
+        "familia gonzalez lopez":7, 
+        "familia lovera sanabria":8,
+        "familia sanabria hernandez":8, 
+        "familia becerril gonzalez":9, 
+        "familia gonzalez dias":9,
+        "familia gonzalez monroy":10, 
+        "familia dumbo":11, 
+        "familia grande":11,
+        "familia jessy":3, 
+        "familia lic":3, 
+        "abel":"principal",
+        "ana":"principal", 
+        "madrina capibara":"principal", 
+        "andy":2,
+        "beto":2, 
+        "reni":2, 
+        "mya":2,
+        "shay":2, 
+        "feyo":2, 
+        "miriam":3,
+        "bryan":3,
+        "alan":3,
+        "yaneth":3,
+        "toño":"principal",
+        "susi":"principal",
+        "linda":2,
+        "nain":1,
+        "magali":3,
+        "queso":11,
+        "pishi":11,
+        "chato":11,
+        "tia tere de liz":12,
+      };
 
       if(!mesas[nombre]){
         alert("Lo sentimos, tu nombre no está en la lista de invitados. No puedes enviar la confirmación.");
@@ -213,15 +269,31 @@
       let mensaje = "", emoji = "", botones = "";
       if(asistencia === "✅Si asistiré"){
         emoji = "🎉";
-        mensaje = `¡Hola <b>${nombre}</b>!<br>Te hemos asignado la <b>mesa ${mesas[nombre]}</b> para que disfrutes cómodamente.`;
-        botones = `
-          <a href="https://maps.app.goo.gl/ZC29vyFcnke4iWWH7" target="_blank" class="btn btn-outline-primary">📍 Ver ubicación del evento</a>
-          <a href="https://maps.app.goo.gl/mDzoizMcxHnRXqka9" target="_blank" class="btn btn-outline-secondary">🛕 Ver ubicación de la misa</a>
-        `;
+        if (nombre == "familia zanabria gonzalez"){
+          mensaje = `¡Hola <b>${nombre}</b>!<br>Te hemos asignado la <b>mesa ${mesas[nombre]}</b> para que disfrutes cómodamente. Nain se encuentra en la mesa 1 mientras que Linda se encuentra en la mesa 2 `;
+          botones = `
+            <a href="https://maps.app.goo.gl/ZC29vyFcnke4iWWH7" target="_blank" class="btn btn-outline-primary">📍 Ver ubicación del evento</a>
+            <a href="https://maps.app.goo.gl/mDzoizMcxHnRXqka9" target="_blank" class="btn btn-outline-secondary">🛕 Ver ubicación de la misa</a>
+          `;
+        } else if (nombre == "familia sanabria hernandez"){
+          mensaje = `¡Hola <b>${nombre}</b>!<br>Te hemos asignado la <b>mesa ${mesas[nombre]}</b> para que disfrutes cómodamente. Abuelita Cande se encuentra con ustedes 😁. `;
+          botones = `
+            <a href="https://maps.app.goo.gl/ZC29vyFcnke4iWWH7" target="_blank" class="btn btn-outline-primary">📍 Ver ubicación del evento</a>
+            <a href="https://maps.app.goo.gl/mDzoizMcxHnRXqka9" target="_blank" class="btn btn-outline-secondary">🛕 Ver ubicación de la misa</a>
+          `;
+        } else {
+          // 👈 este else es el "default" para todos los demás invitados
+          mensaje = `¡Hola <b>${nombre}</b>!<br>Te hemos asignado la <b>mesa ${mesas[nombre]}</b> para que disfrutes cómodamente.`;
+          botones = `
+            <a href="https://maps.app.goo.gl/ZC29vyFcnke4iWWH7" target="_blank" class="btn btn-outline-primary">📍 Ver ubicación del evento</a>
+            <a href="https://maps.app.goo.gl/mDzoizMcxHnRXqka9" target="_blank" class="btn btn-outline-secondary">🛕 Ver ubicación de la misa</a>
+          `;
+        }
       } else {
         emoji = "😥";
         mensaje = `Lamentamos que no puedas asistir, <b>${nombre}</b>.<br>¡Te mandamos un fuerte abrazo lleno de cariño! 💖`;
       }
+
 
       document.getElementById("emojiModal").innerHTML = emoji;
       document.getElementById("mensajeContenido").innerHTML = mensaje;
@@ -234,12 +306,11 @@
       setTimeout(()=>{ document.getElementById("miFormulario").reset(); }, 800);
     }
 
-    // Carrusel de fotos de Enzo
+    // Carrusel de fotos
     const fotosEnzo = [ "/assets/enzo1.png","/assets/enzo2.png","/assets/enzo3.png",
                         "/assets/enzo4.png","/assets/enzo5.png","/assets/enzo6.png",
                         "/assets/enzo7.png","/assets/enzo8.png","/assets/enzo9.png",
-                        "/assets/enzo10.png","/assets/enzo11.png","/assets/enzo12.png",
-    ];
+                        "/assets/enzo10.png","/assets/enzo11.png","/assets/enzo12.png"];
     let index = 0;
     setInterval(() => {
       const img = document.getElementById('enzoFoto');
@@ -249,10 +320,7 @@
         img.src = fotosEnzo[index];
         img.style.opacity = 1;
       }, 1000);
-    }, 5000);
+    }, 2000);
   </script>
 </body>
 </html>
-
-
-
