@@ -114,11 +114,60 @@
             action="https://docs.google.com/forms/d/e/1FAIpQLSdXNepuHXE1BL8w1-QRASghag7WfZlF65YCVU20GLxMlFI6Wg/formResponse"
             target="hidden_iframe" onsubmit="return enviarGoogleForm(event);">
 
-        <div class="mb-3 text-start">
-          <label for="nombreInput" class="form-label fw-bold">Nombre Completo</label>
-          <input type="text" class="form-control" id="nombreInput" name="entry.1506892174" placeholder="Ingresa tu nombre completo" required>
+          <div class="mb-3 text-start">
+            <label for="nombreInput" class="form-label fw-bold">
+              Escribe tu nombre o el de tu familia <br>
+              <small class="text-muted">Ejemplo: "Familia Zanabria González" o "Toño"</small>
+            </label>
+            <input list="listaInvitados" class="form-control" id="nombreInput" 
+                  name="entry.1506892174" placeholder="Ingresa tu nombre o familia" required>
+            
+            <datalist id="listaInvitados">
+              <!-- Familias -->
+              <option value="familia zanabria gonzalez">
+              <option value="familia zanabria hernandez">
+              <option value="familia gonzalez sanabria">
+              <option value="familia manuel">
+              <option value="familia sanabria estrada">
+              <option value="familia gonzalez ruiz">
+              <option value="familia navarrete gonzalez">
+              <option value="familia gonzalez">
+              <option value="familia sanabria asencio">
+              <option value="familia sanabria candilla">
+              <option value="familia gonzalez lopez">
+              <option value="familia lovera sanabria">
+              <option value="familia sanabria hernandez">
+              <option value="familia becerril gonzalez">
+              <option value="familia gonzalez dias">
+              <option value="familia gonzalez monroy">
+              <option value="familia dumbo">
+              <option value="familia grande">
+              <option value="familia jessy">
+              <option value="familia lic">
+              
+              <!-- Invitados individuales -->
+              <option value="abel">
+              <option value="ana">
+              <option value="madrina capibara">
+              <option value="andy">
+              <option value="beto">
+              <option value="reni">
+              <option value="mya">
+              <option value="shay">
+              <option value="feyo">
+              <option value="miriam">
+              <option value="bryan">
+              <option value="alan">
+              <option value="yaneth">
+              <option value="toño">
+              <option value="magali">
+              <option value="queso">
+              <option value="pishi">
+              <option value="chato">
+              <option value="tia tere de liz">
+            </datalist>
         </div>
-
+        
         <div class="mb-3 text-start">
           <label for="asistencia" class="form-label fw-bold">Confirmación de Asistencia</label>
           <select class="form-select" id="asistencia" name="entry.505008118" required>
@@ -331,6 +380,7 @@
   </script>
 </body>
 </html>
+
 
 
 
